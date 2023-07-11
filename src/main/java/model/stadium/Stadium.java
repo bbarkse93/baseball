@@ -1,21 +1,22 @@
 package model.stadium;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Getter
+@Setter
 @ToString
+
 public class Stadium {
+    private int id;
+    private String name;
+    private Timestamp createdAt;
 
-    private int Id;
-    private String Name;
-    private Timestamp CreatedAt;
-
+    @Builder
     public Stadium(int id, String name, Timestamp createdAt) {
-        Id = id;
-        Name = name;
-        CreatedAt = createdAt;
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
     }
 }

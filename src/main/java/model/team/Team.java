@@ -1,4 +1,4 @@
-package model.out_player;
+package model.team;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,18 +10,18 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-public class OutPlayer {
+public class Team {
 
     private int id;
-    private int playerId;
-    private String reason;
+    private int stadiumId;
+    private String name;
     private Timestamp createdAt;
 
     @Builder
-    public OutPlayer(int id, int playerId, String reason, Timestamp createdAt) {
+    public Team(int id, int stadiumId, String name, Timestamp createdAt) {
         this.id = id;
-        this.playerId = playerId;
-        this.reason = reason;
+        this.stadiumId = stadiumId;
+        this.name = name;
         this.createdAt = createdAt;
     }
 }
