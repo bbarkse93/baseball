@@ -11,7 +11,7 @@ import java.util.List;
 public class StadiumDao {
     private Connection connection;
 
-    public StadiumDao(Connection connection){
+    public StadiumDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -22,9 +22,9 @@ public class StadiumDao {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, name);
             int result = statement.executeUpdate();
-            if (result == 1){
+            if (result == 1) {
                 System.out.println("성공");
-            }else {
+            } else {
                 System.out.println("실패");
             }
         }
@@ -36,7 +36,7 @@ public class StadiumDao {
         List<Stadium> stadiums = new ArrayList<>();
         String query = "SELECT * FROM stadium";
         try (Statement statement = connection.prepareStatement(query)) {
-            try(ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
                     Stadium stadium = buildStadiumFromResultSet(resultSet);
                     stadiums.add(stadium);
@@ -45,6 +45,7 @@ public class StadiumDao {
         }
         return stadiums;
     }
+
     private Stadium buildStadiumFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
@@ -56,8 +57,4 @@ public class StadiumDao {
                 .createdAt(createdAt)
                 .build();
     }
-
-    // 경기장 한 곳 조회
-
-
 }

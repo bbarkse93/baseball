@@ -15,7 +15,7 @@ public class TeamDao {
         this.connection = connection;
     }
     // 팀 등록
-    public Team insert(int stadiumId, String name) throws SQLException {
+    public Team insert(Integer stadiumId, String name) throws SQLException {
         String query = "INSERT INTO team (stadium_id, name, created_at) values (?, ?, now())";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, stadiumId);

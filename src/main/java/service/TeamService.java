@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TeamService {
-    public void 팀등록(int stadiumId, String name) {
+    public void 팀등록(Integer stadiumId, String name) {
         Connection connection = DBConnection.getInstance();
         TeamDao teamDao = new TeamDao(connection);
         try{

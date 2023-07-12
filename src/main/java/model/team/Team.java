@@ -12,13 +12,13 @@ import java.sql.Timestamp;
 @ToString
 public class Team {
 
-    private int id;
-    private int stadiumId;
+    private Integer id;
+    private Integer stadiumId;
     private String name;
     private Timestamp createdAt;
 
     @Builder
-    public Team(int id, int stadiumId, String name, Timestamp createdAt) {
+    public Team(Integer id, Integer stadiumId, String name, Timestamp createdAt) {
         this.id = id;
         this.stadiumId = stadiumId;
         this.name = name;

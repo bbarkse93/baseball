@@ -10,9 +10,11 @@ import java.util.List;
 @Getter
 public class OutPlayerDao {
     private Connection connection;
-    public OutPlayerDao(Connection connection){
+
+    public OutPlayerDao(Connection connection) {
         this.connection = connection;
     }
+
     // 퇴출 선수 등록
     public OutPlayer insert(int playerId, String reason) throws SQLException {
         String query = "INSERT INTO out_player (player_id, reason, created_at) values(?, ?, now())";
@@ -20,9 +22,9 @@ public class OutPlayerDao {
             statement.setInt(1, playerId);
             statement.setString(2, reason);
             int result = statement.executeUpdate();
-            if (result == 1){
+            if (result == 1) {
                 System.out.println("성공");
-            }else {
+            } else {
                 System.out.println("실패");
             }
         }
@@ -34,7 +36,7 @@ public class OutPlayerDao {
         List<OutPlayer> outPlayers = new ArrayList<>();
         String query = "SELECT * FROM out_player";
         try (Statement statement = connection.prepareStatement(query)) {
-            try(ResultSet resultSet = statement.executeQuery(query)){
+            try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
                     OutPlayer outPlayer = buildOutPlayerFromResultSet(resultSet);
                     outPlayers.add(outPlayer);
@@ -57,6 +59,4 @@ public class OutPlayerDao {
                 .createdAt(createdAt)
                 .build();
     }
-
-    // 방출 선수 한 명 조회
 }
