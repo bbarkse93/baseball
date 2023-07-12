@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class OutPlayerService {
-    public void createOutPlayer(int playerId, String reason) {
+    public void 선수퇴출등록(int playerId, String reason) {
         Connection connection = DBConnection.getInstance();
         OutPlayerDao outPlayerDao = new OutPlayerDao(connection);
         try{
-            outPlayerDao.createOutPlayer(playerId, reason);
+            outPlayerDao.insert(playerId, reason);
         } catch(
                 SQLException e)
         {
@@ -23,7 +23,7 @@ public class OutPlayerService {
         }
     }
 
-    public void getAllOutPlayers(){
+    public void 퇴출목록(){
         Connection connection = DBConnection.getInstance();
         OutPlayerDao outPlayerDao = new OutPlayerDao(connection);
         try {

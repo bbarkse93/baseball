@@ -17,11 +17,16 @@ public class StadiumDao {
 
     // 경기장 등록(insert)
 
-    public Stadium createStadium(String name) throws SQLException {
+    public Stadium insert(String name) throws SQLException {
         String query = "INSERT INTO stadium (name, created_at) values (?, now())";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, name);
-            statement.executeUpdate();
+            int result = statement.executeUpdate();
+            if (result == 1){
+                System.out.println("성공");
+            }else {
+                System.out.println("실패");
+            }
         }
         return null;
     }

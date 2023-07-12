@@ -10,11 +10,11 @@ import java.util.List;
 
 public class StadiumService {
 
-    public void createStadium(String name) {
+    public void 야구장등록(String name) {
         Connection connection = DBConnection.getInstance();
         StadiumDao stadiumDao = new StadiumDao(connection);
         try{
-            stadiumDao.createStadium(name);
+            stadiumDao.insert(name);
         } catch(
                 SQLException e)
         {
@@ -22,7 +22,7 @@ public class StadiumService {
         }
     }
 
-    public void getAllStadiums(){
+    public void 야구장목록(){
         Connection connection = DBConnection.getInstance();
         StadiumDao stadiumDao = new StadiumDao(connection);
         try {

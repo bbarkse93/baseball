@@ -15,12 +15,17 @@ public class TeamDao {
         this.connection = connection;
     }
     // 팀 등록
-    public Team createTeam(int stadiumId, String name) throws SQLException {
+    public Team insert(int stadiumId, String name) throws SQLException {
         String query = "INSERT INTO team (stadium_id, name, created_at) values (?, ?, now())";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, stadiumId);
             statement.setString(2, name);
-            statement.executeUpdate();
+            int result = statement.executeUpdate();
+            if (result == 1){
+                System.out.println("성공");
+            }else {
+                System.out.println("실패");
+            }
         }
         return null;
     }

@@ -14,12 +14,17 @@ public class OutPlayerDao {
         this.connection = connection;
     }
     // 퇴출 선수 등록
-    public OutPlayer createOutPlayer(int playerId, String reason) throws SQLException {
+    public OutPlayer insert(int playerId, String reason) throws SQLException {
         String query = "INSERT INTO out_player (player_id, reason, created_at) values(?, ?, now())";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, playerId);
             statement.setString(2, reason);
-            statement.executeUpdate();
+            int result = statement.executeUpdate();
+            if (result == 1){
+                System.out.println("성공");
+            }else {
+                System.out.println("실패");
+            }
         }
         return null;
     }

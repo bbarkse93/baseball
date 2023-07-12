@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TeamService {
-    public void createTeam(int stadiumId, String name) {
+    public void 팀등록(int stadiumId, String name) {
         Connection connection = DBConnection.getInstance();
         TeamDao teamDao = new TeamDao(connection);
         try{
-            teamDao.createTeam(stadiumId, name);
+            teamDao.insert(stadiumId, name);
         } catch(
                 SQLException e)
         {
@@ -23,7 +23,7 @@ public class TeamService {
         }
     }
 
-    public void getAllTeams(){
+    public void 팀목록(){
         Connection connection = DBConnection.getInstance();
         TeamDao teamDao = new TeamDao(connection);
         try {

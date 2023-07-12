@@ -16,19 +16,24 @@ public class PlayerDao {
     }
 
     // 선수 등록
-    public Player createPlayer(int teamId, String name, String position) throws SQLException {
+    public Player insert(int teamId, String name, String position) throws SQLException {
         String query = "INSERT INTO player (team_id, name, position, created_at) values(?, ?, ?, now())";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, teamId);
             statement.setString(2, name);
             statement.setString(3, position);
-            statement.executeUpdate();
+            int result = statement.executeUpdate();
+            if (result == 1){
+                System.out.println("성공");
+            }else {
+                System.out.println("실패");
+            }
         }
         return null;
     }
 
     // 선수 전체 조회
-    public List<Player> getAllPlayers() throws SQLException {
+    public List<Player> selectAll() throws SQLException {
         List<Player> players = new ArrayList<>();
         String query = "SELECT * FROM player";
         try (Statement statement = connection.prepareStatement(query)) {
@@ -55,5 +60,12 @@ public class PlayerDao {
                 .build();
     }
 
-    // 선수 한 명 조회
+    // 선수 한 명 수정
+    public void update(int id) throws SQLException{
+        String query = "UPDATE player SET team_id = null WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
 }

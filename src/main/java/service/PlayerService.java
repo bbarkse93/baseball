@@ -12,11 +12,11 @@ import java.util.List;
 
 public class PlayerService {
 
-    public void createPlayer(int teamId, String name, String position) {
+    public void 선수등록(int teamId, String name, String position) {
         Connection connection = DBConnection.getInstance();
         PlayerDao playerDao = new PlayerDao(connection);
         try{
-            playerDao.createPlayer(teamId, name, position);
+            playerDao.insert(teamId, name, position);
         } catch(
                 SQLException e)
         {
@@ -24,11 +24,11 @@ public class PlayerService {
         }
     }
 
-    public void getAllPlayers(){
+    public void 선수목록(){
         Connection connection = DBConnection.getInstance();
         PlayerDao playerDao = new PlayerDao(connection);
         try {
-            List<Player> playerList = playerDao.getAllPlayers();
+            List<Player> playerList = playerDao.selectAll();
             System.out.println(playerList);
         } catch (SQLException e) {
             System.out.println("조회 실패 :" + e.getMessage());
