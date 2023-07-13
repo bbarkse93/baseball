@@ -40,6 +40,8 @@ public class StadiumDao {
                 while (resultSet.next()) {
                     Stadium stadium = buildStadiumFromResultSet(resultSet);
                     stadiums.add(stadium);
+                    System.out.println(stadium);
+                    System.out.println("");
                 }
             }
         }
@@ -47,10 +49,9 @@ public class StadiumDao {
     }
 
     private Stadium buildStadiumFromResultSet(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+        Integer id = resultSet.getInt("id");
         String name = resultSet.getString("name");
         Timestamp createdAt = resultSet.getTimestamp("created_at");
-
         return Stadium.builder()
                 .id(id)
                 .name(name)

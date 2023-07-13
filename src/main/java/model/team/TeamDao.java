@@ -1,7 +1,7 @@
 package model.team;
 
+import dto.TeamRespDTO;
 import lombok.Getter;
-import model.stadium.Stadium;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,8 +45,8 @@ public class TeamDao {
         return teams;
     }
     private Team buildTeamFromResultSet(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
-        int stadiumId = resultSet.getInt("stadiumId");
+        Integer id = resultSet.getInt("id");
+        Integer stadiumId = resultSet.getInt("stadiumId");
         String name = resultSet.getString("name");
         Timestamp createdAt = resultSet.getTimestamp("created_at");
 
@@ -58,5 +58,36 @@ public class TeamDao {
                 .build();
     }
 
-    // 한 팀 조회
+    public List<TeamRespDTO> getJoinTable() throws SQLException {
+        List<TeamRespDTO> teams = new ArrayList<>();
+        String query = "select a.*, b.name as stadium_name from team a , stadium b where a.id = b.id";
+        try (Statement statement = connection.prepareStatement(query)) {
+            try(ResultSet resultSet = statement.executeQuery(query)){
+                while (resultSet.next()) {
+                    TeamRespDTO teamRepDTO = buildJoinTableResultSet(resultSet);
+                    teams.add(teamRepDTO);
+                    System.out.println(teamRepDTO);
+                    System.out.println("");
+                }
+            }
+        }
+        return teams;
+    }
+
+    private TeamRespDTO buildJoinTableResultSet(ResultSet resultSet) throws SQLException {
+        Integer id = resultSet.getInt("id");
+        Integer stadiumId = resultSet.getInt("stadium_id");
+        String name = resultSet.getString("name");
+        Timestamp createdAt = resultSet.getTimestamp("created_at");
+        String stadiumName = resultSet.getString("stadium_name");
+
+        return TeamRespDTO.builder()
+                .id(id)
+                .stadiumId(stadiumId)
+                .name(name)
+                .createdAt(createdAt)
+                .stadiumName(stadiumName)
+                .build();
+    }
+
 }

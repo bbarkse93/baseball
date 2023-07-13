@@ -40,6 +40,7 @@ create table `out_player`(
 `created_at` timestamp
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- UK키 설정
 ALTER TABLE player ADD CONSTRAINT unique_player UNIQUE (team_id, position);
 
 -- 경기장 데이터

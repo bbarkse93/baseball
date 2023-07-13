@@ -1,9 +1,7 @@
 package service;
 
 import db.DBConnection;
-import model.stadium.Stadium;
-import model.stadium.StadiumDao;
-import model.team.Team;
+import dto.TeamRespDTO;
 import model.team.TeamDao;
 
 import java.sql.Connection;
@@ -11,9 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TeamService {
+    Connection connection = DBConnection.getInstance();
+    TeamDao teamDao = new TeamDao(connection);
+
     public void 팀등록(Integer stadiumId, String name) {
-        Connection connection = DBConnection.getInstance();
-        TeamDao teamDao = new TeamDao(connection);
         try{
             teamDao.insert(stadiumId, name);
         } catch(
@@ -24,13 +23,12 @@ public class TeamService {
     }
 
     public void 팀목록(){
-        Connection connection = DBConnection.getInstance();
-        TeamDao teamDao = new TeamDao(connection);
         try {
-            List<Team> teamList = teamDao.getAllTeams();
-            System.out.println(teamList);
+            List<TeamRespDTO> teamList = teamDao.getJoinTable();
         } catch (SQLException e) {
             System.out.println("조회 실패 :" + e.getMessage());
         }
     }
+
+
 }

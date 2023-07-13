@@ -9,12 +9,12 @@ import java.sql.Timestamp;
 @ToString
 
 public class Stadium {
-    private int id;
+    private Integer id;
     private String name;
     private Timestamp createdAt;
 
     @Builder
-    public Stadium(int id, String name, Timestamp createdAt) {
+    public Stadium(Integer id, String name, Timestamp createdAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
